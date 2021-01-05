@@ -6,14 +6,11 @@
       dark
     >
       <v-toolbar-title>Vuetyfy</v-toolbar-title>
-      <v-content>
-        <router-veiw></router-veiw>
-      </v-content>
-      <v-spacer></v-spacer>
     </v-app-bar>
-
-    <v-main>
-    </v-main>
+      
+      <v-content>
+        <router-view></router-view>
+      </v-content>
   </v-app>
 </template>
 
