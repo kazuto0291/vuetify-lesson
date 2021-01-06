@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 import VMain from '@/components/reversi/VMain.vue';
-import VGame from '@/components/reversi/VGame.vue'
+import VGame from '@/components/reversi/VGame.vue';
 
 Vue.use(VueRouter);
 
@@ -15,7 +15,7 @@ const routes: RouteConfig[] = [
     path: '/game',
     name: 'VGame',
     component: VGame,
-  }
+  },
 ];
 
 const router = new VueRouter({

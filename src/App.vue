@@ -23,9 +23,5 @@ export default Vue.extend({
 
   components: {
   },
-
-  data: () => ({
-    
-  }),
 });
 </script>
