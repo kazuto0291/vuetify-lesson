@@ -1,9 +1,8 @@
 <template>
-  <v-container class="ma-0 pa-0">
-    <div class="cell">
-
-    </div>
-  </v-container>
+<div class="cell-wrapper">
+    <div class="cell"></div>
+    <div class="stone"></div>
+</div>
 </template>
 
 <script lang="ts">
@@ -22,5 +21,9 @@ export default class VCell extends Vue {
   width: 64px;
   background-color: darkgreen;
   border: 2px solid black;
+}
+
+.stone {
+  background-color: white;
 }
 </style>
