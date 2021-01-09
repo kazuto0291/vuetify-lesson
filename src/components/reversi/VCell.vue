@@ -16,6 +16,10 @@ export default class VCell extends Vue {
 </script>
 
 <style scoped>
+.cell-wrapper {
+  position: relative;
+}
+
 .cell {
   height: 64px;
   width: 64px;
@@ -24,6 +28,20 @@ export default class VCell extends Vue {
 }
 
 .stone {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+}
+
+.white-stone {
   background-color: white;
 }
+
+.black-stone {
+  background-color: black;
+}
+
 </style>
