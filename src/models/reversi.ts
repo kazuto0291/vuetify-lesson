@@ -25,6 +25,12 @@ export class Board {
 
     this.ref(p).state = this.turn;
 
+    this.next();
+
+    if (this.shouldPass()) { this.next(); }
+  }
+  
+  public next() {
     if (this.turn === CellState.Black) {return this.turn = CellState.White }
     if (this.turn === CellState.White) { this.turn = CellState.Black }
   }
@@ -35,6 +41,7 @@ export class Board {
 
   // serch--ある座標(x, y)に石を置くときに、そこに石をおいたらひっくり返る石の全体の座標を返すメソッド
   public search(p: Point):Point[] {
+    if (!this.ref(p).isNone) return[];
     const self =this;
     const list = [];
     // 再起的に探索する
@@ -79,6 +86,19 @@ export class Board {
       count += r.whites
     })
     return count;
+  }
+
+  public shouldPass():boolean {
+    for (let i = 0; i < 8; i++) {
+      for( let j = 0; j < 8; j++) {
+        const reversedList = this.search( new Point(i, j));
+        console.log(reversedList.length)
+        if (reversedList.length > 0) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 }
 
