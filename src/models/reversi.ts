@@ -17,11 +17,15 @@ export class Board {
   }
 
   public put(p: Point) {
-    if (!this.rows[p.y].cells[p.x].isNone) { return }
-    this.rows[p.y].cells[p.x].state = this.turn;
+    if (!this.ref(p).isNone) { return }
+    this.ref(p).state = this.turn;
 
     if (this.turn === CellState.Black) {return this.turn = CellState.White }
     if (this.turn === CellState.White) { this.turn = CellState.Black }
+  }
+  // ref--現在のCell(座標)のstateを返すような関数
+  public ref(p: Point): Cell{
+    return this.rows[p.y].cells[p.x];
   }
 
   // serch--ある座標(x, y)に石を置くときに、そこに石をおいたらひっくり返る石の全体の座標を返すメソッド
