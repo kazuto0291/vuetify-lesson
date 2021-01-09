@@ -1,7 +1,7 @@
 <template>
 <div class="cell-wrapper">
     <div class="cell"></div>
-    <div class="stone"></div>
+    <div class="stone" :class="stoneClass"></div>
 </div>
 </template>
 
@@ -20,6 +20,13 @@ export default class VCell extends Vue {
 
   public created() {
     console.log(this.cell.x, this.cell.y)
+  }
+// Cellのオブジェクト状態で動的にクラスを当てる
+  public get stoneClass() {
+    return {
+      'white-stone': this.cell.isWhite,
+      'black-stone': this.cell.isBlack
+    }
   }
 }
 
