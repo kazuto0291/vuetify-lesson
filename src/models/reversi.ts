@@ -64,6 +64,22 @@ export class Board {
     result = result.concat(_search(p, p => new Point(p.x + 1, p.y + 1), []));
     return result;
   }
+
+  public get blacks(): number {
+    let count =0;
+    this.rows.forEach(r => {
+      count += r.blacks;
+    })
+    return count;
+  }
+
+  public get whites():number {
+    let count = 0;
+    this.rows.forEach( r => {
+      count += r.whites
+    })
+    return count;
+  }
 }
 
 
@@ -76,6 +92,22 @@ export class Row {
     this.num = rowNumber
     this.cells = [...Array(8).keys()].map(i => new Cell(i, rowNumber))
   };
+
+  public get blacks(): number {
+    let count = 0;
+    this.cells.forEach(c => {
+      if(c.isBlack) count++
+    })
+    return count;
+  }
+
+  public get whites(): number {
+    let count = 0;
+    this.cells.forEach(c => {
+      if (c.isWhite) count++
+    })
+    return count;
+  }
 }
 
 export class Cell {

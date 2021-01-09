@@ -11,6 +11,11 @@
     justify-center>
       <h2 class="mt-5">{{current}}</h2>
     </v-layout>
+    <v-layout
+    justify-center>
+      <h2 class="mt-5 mr-5">黒の数：{{blacks}}</h2>
+      <h2 class="mt-5">白の数：{{whites}}</h2>
+    </v-layout>
 
   </v-container>
 </template>
@@ -35,6 +40,14 @@ export default class VGame extends Vue {
     } else {
       return '黒色の手番'
     }
+  }
+
+  public get blacks() {
+    return this.board.blacks;
+  }
+
+  public get whites() {
+    return this.board.whites;
   }
 }
 
