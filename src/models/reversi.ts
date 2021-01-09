@@ -8,17 +8,19 @@ export class Board {
   public rows : Row[];
   constructor() {
     this.rows = [...Array(8).keys()].map(i => new Row(i));
-  }
-}
+  };
+};
 
 
 export class Row {
   
   public cells: Cell[];
+  public num: number;
 
   constructor(rowNumber: number) {
+    this.num = rowNumber
     this.cells = [...Array(8).keys()].map(i => new Cell(i, rowNumber))
-  }
+  };
 }
 
 export class Cell {
@@ -31,7 +33,6 @@ export class Cell {
     this.x = x;
     this.y = y;
   }
-
 }
 
 
@@ -40,5 +41,5 @@ export class Cell {
 export enum CellState {
   White = 'white',
   Black = 'black',
-  None = 'none'
+  None = 'none',
 }
