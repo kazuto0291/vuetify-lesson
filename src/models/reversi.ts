@@ -15,7 +15,8 @@ export class Board {
   }
 
   public put(x:number, y:number) {
-    return this.rows[y].cells[x].state = CellState.Black;
+    if (!this.rows[y].cells[x].isNone) { return }
+    this.rows[y].cells[x].state = CellState.Black;
   }
 }
 
@@ -48,6 +49,10 @@ export class Cell {
 
   public get isWhite() {
     return this.state === CellState.White;
+  }
+
+  public get isNone() {
+    return this.state === CellState.None;
   }
 }
 
