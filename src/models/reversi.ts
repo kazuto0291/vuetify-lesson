@@ -26,6 +26,13 @@ export class Board {
 
   // serch--ある座標(x, y)に石を置くときに、そこに石をおいたらひっくり返る石の全体の座標を返すメソッド
   public search(p: Point):Point[] {
+    // 再起的に探索する
+    // _p--探索対象のポイント(座標)
+    // next--次の探索対象の座標を受け取る（返す）関数
+    // list--
+    const _search = (_p: Point, next: (pre: Point) => Point, list: Point[]): Point[] => {
+      return [];
+    }
     return [];
   }
 }
