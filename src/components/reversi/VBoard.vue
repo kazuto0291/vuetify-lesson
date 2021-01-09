@@ -12,7 +12,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import VRow from '@/components/reversi/VRow.vue';
-import { Board } from '@/models/reversi';
+import { Board, Point } from '@/models/reversi';
 
 @Component({
   components: {
@@ -24,9 +24,8 @@ export default class VBoard extends Vue {
   @Prop({required: true})
   public board!: Board;
 
-  public onPutEvent(x:number, y:number) {
-    console.log('22222222')
-    return this.board.put(x, y);
+  public onPutEvent(p :Point) {
+    return this.board.put(p);
   }
 }
 

@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Emit } from 'vue-property-decorator';
-import { Cell } from '@/models/reversi';
+import { Cell, Point } from '@/models/reversi';
 
 @Component
 export default class VCell extends Vue {
@@ -24,7 +24,7 @@ export default class VCell extends Vue {
   // public created() {
   //   console.log(this.cell.x, this.cell.y)
   // }
-  
+
 // Cellのオブジェクト状態で動的にクラスを当てる
   public get stoneClass() {
     return {
@@ -36,10 +36,10 @@ export default class VCell extends Vue {
   // （put）イベントを$emitする
   // putイベントを親（上）のコンポーネントに通知できる用になる（VRowコンポーネントに通知する）
   @Emit('put')
-  public put(x:number, y: number) {}
+  public put(p: Point) {}
 
   public onClick() {
-    this.put(this.cell.x, this.cell.y)
+    this.put(new Point(this.cell.x, this.cell.y))
   }
 }
 

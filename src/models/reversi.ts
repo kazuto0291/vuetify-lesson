@@ -16,17 +16,17 @@ export class Board {
     this.rows[4].cells[3].state = CellState.Black;
   }
 
-  public put(x:number, y:number) {
-    if (!this.rows[y].cells[x].isNone) { return }
-    this.rows[y].cells[x].state = this.turn;
+  public put(p: Point) {
+    if (!this.rows[p.y].cells[p.x].isNone) { return }
+    this.rows[p.y].cells[p.x].state = this.turn;
 
     if (this.turn === CellState.Black) {return this.turn = CellState.White }
     if (this.turn === CellState.White) { this.turn = CellState.Black }
   }
 
   // serch--ある座標(x, y)に石を置くときに、そこに石をおいたらひっくり返る石の全体の座標を返すメソッド
-  public search() {
-
+  public search(p: Point):Point[] {
+    return [];
   }
 }
 
@@ -68,7 +68,7 @@ export class Cell {
 
 
 // 座標のクラスを作る
-class Point {
+export class Point {
   public x: number;
   public y: number;
   constructor(x: number, y:number) {
