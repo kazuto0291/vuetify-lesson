@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop, Emit } from 'vue-property-decorator';
 import VCell from '@/components/reversi/VCell.vue';
 import { Row } from '@/models/reversi';//①
 
@@ -27,8 +27,14 @@ export default class VRow extends Vue {
   @Prop({required: true})// ②
   public row!: Row;//③
 
+  // VCellコンポーネントのputイベントを上のVBoardにも伝えるためにEmitを使う
+  @Emit('put')
+  public put(x: number, y: number) {
+
+  }
+
   public onPutEvent(x:number, y:number) {
-    console.log(x, y)
+    this.put(x, y)
   }
 
 }

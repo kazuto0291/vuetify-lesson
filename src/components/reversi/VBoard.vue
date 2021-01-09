@@ -4,6 +4,7 @@
       v-for=" row in board.rows "
       :key="row.num"
       :row="row"
+      @put="onPutEvent"
     />
   </div>
 </template>
@@ -22,6 +23,11 @@ export default class VBoard extends Vue {
 
   @Prop({required: true})
   public board!: Board;
+
+  public onPutEvent(x:number, y:number) {
+    console.log('22222222')
+    return this.board.put(x, y);
+  }
 }
 
 </script>
