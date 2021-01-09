@@ -5,7 +5,9 @@
 
 export class Board {
 
-  public rows : Row[];
+  public rows: Row[];
+  public turn: CellState = CellState.Black;
+
   constructor() {
     this.rows = [...Array(8).keys()].map(i => new Row(i));
     this.rows[3].cells[3].state = CellState.White;
@@ -16,7 +18,10 @@ export class Board {
 
   public put(x:number, y:number) {
     if (!this.rows[y].cells[x].isNone) { return }
-    this.rows[y].cells[x].state = CellState.Black;
+    this.rows[y].cells[x].state = this.turn;
+
+    if (this.turn === CellState.Black) {return this.turn = CellState.White }
+    if (this.turn === CellState.White) { this.turn = CellState.Black }
   }
 }
 
@@ -43,15 +48,15 @@ export class Cell {
     this.y = y;
   }
 
-  public get isBlack() {
+  public get isBlack(): boolean {
     return this.state === CellState.Black;
   }
 
-  public get isWhite() {
+  public get isWhite(): boolean {
     return this.state === CellState.White;
   }
 
-  public get isNone() {
+  public get isNone(): boolean {
     return this.state === CellState.None;
   }
 }
