@@ -1,12 +1,15 @@
 <template>
-<div class="cell-wrapper">
+  <div
+    class="cell-wrapper"
+    @click="onClick"
+  >
     <div class="cell"></div>
     <div class="stone" :class="stoneClass"></div>
 </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop, Emit } from 'vue-property-decorator';
 import { Cell } from '@/models/reversi';
 
 @Component
@@ -18,15 +21,25 @@ export default class VCell extends Vue {
   // !(ビックリマークはnull許可・undefindを許可する型)
   public cell!: Cell;
 
-  public created() {
-    console.log(this.cell.x, this.cell.y)
-  }
+  // public created() {
+  //   console.log(this.cell.x, this.cell.y)
+  // }
+  
 // Cellのオブジェクト状態で動的にクラスを当てる
   public get stoneClass() {
     return {
       'white-stone': this.cell.isWhite,
       'black-stone': this.cell.isBlack
     }
+  }
+
+  // （put）イベントを$emitする
+  // putイベントを親（上）のコンポーネントに通知できる用になる（VRowコンポーネントに通知する）
+  @Emit('put')
+  public put(x:number, y: number) {}
+
+  public onClick() {
+    this.put(this.cell.x, this.cell.y)
   }
 }
 

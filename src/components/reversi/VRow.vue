@@ -6,6 +6,7 @@
         v-for="cell in row.cells"
         :key="`${cell.x}-${cell.y}`"
         :cell="cell"
+        @put="onPutEvent"
       />
     </v-layout>
   </v-container>
@@ -25,6 +26,10 @@ export default class VRow extends Vue {
 
   @Prop({required: true})// ②
   public row!: Row;//③
+
+  public onPutEvent(x:number, y:number) {
+    console.log(x, y)
+  }
 
 }
 
