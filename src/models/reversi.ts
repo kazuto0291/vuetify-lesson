@@ -5,7 +5,7 @@
 
 export class Board {
 
-  private rows : Row[];
+  public rows : Row[];
   constructor() {
     this.rows = [...Array(8).keys()].map(i => new Row(i));
   }
@@ -14,7 +14,7 @@ export class Board {
 
 export class Row {
   
-  private cells: Cell[];
+  public cells: Cell[];
 
   constructor(rowNumber: number) {
     this.cells = [...Array(8).keys()].map(i => new Cell(i, rowNumber))
@@ -23,8 +23,8 @@ export class Row {
 
 export class Cell {
 
-  private x: number;
-  private y: number;
+  public x: number;
+  public y: number;
   public state: CellState = CellState.None;
 
   constructor(x: number, y: number) {
