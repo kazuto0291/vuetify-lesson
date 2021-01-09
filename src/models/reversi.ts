@@ -18,6 +18,11 @@ export class Board {
 
   public put(p: Point) {
     if (!this.ref(p).isNone) { return }
+
+    const reversedList = this.search(p)
+    if (reversedList.length === 0 ) { return }//ひっくり返せないところにはおけない
+    reversedList.forEach(p => this.ref(p).state = this.turn);//ひっくり返す
+
     this.ref(p).state = this.turn;
 
     if (this.turn === CellState.Black) {return this.turn = CellState.White }
@@ -30,20 +35,40 @@ export class Board {
 
   // serch--ある座標(x, y)に石を置くときに、そこに石をおいたらひっくり返る石の全体の座標を返すメソッド
   public search(p: Point):Point[] {
+    const self =this;
+    const list = [];
     // 再起的に探索する
     // _p--探索対象のポイント(座標)
     // next--次の探索対象の座標を受け取る（返す）関数
-    // list--
+    // list--ひっくり返せる石の座標リスト
     const _search = (_p: Point, next: (pre: Point) => Point, list: Point[]): Point[] => {
-      return [];
+      const _next = next(_p);
+      if (!_next.isBoard || self.ref(_next).isNone) {//石を置きた座標から探索して何も石が置いてない座標のときまたはボードの外に出たとき　空の配列を返す
+        return [];
+      }
+      if (self.ref(_next).state !== self.turn) {//石を置いた座標の隣の座標の石の色が自分のturnと違う色のときlistに追加する
+        list.push(_next);
+        return _search(_next, next ,list)//更に探索を続ける
+      }
+      return list;
     }
-    return [];
+    let result: Point[] = [];
+    //concat--配列の結合
+    result = result.concat(_search(p, p => new Point(p.x, p.y + 1), []));
+    result = result.concat(_search(p, p => new Point(p.x, p.y - 1), []));
+    result = result.concat(_search(p, p => new Point(p.x + 1, p.y), []));
+    result = result.concat(_search(p, p => new Point(p.x - 1, p.y), []));
+    result = result.concat(_search(p, p => new Point(p.x - 1, p.y + 1), []));
+    result = result.concat(_search(p, p => new Point(p.x - 1, p.y - 1), []));
+    result = result.concat(_search(p, p => new Point(p.x + 1, p.y - 1), []));
+    result = result.concat(_search(p, p => new Point(p.x + 1, p.y + 1), []));
+    return result;
   }
 }
 
 
 export class Row {
-  
+
   public cells: Cell[];
   public num: number;
 
@@ -85,6 +110,11 @@ export class Point {
   constructor(x: number, y:number) {
     this.x = x;
     this.y = y;
+  }
+
+  // 座標がボードの外にいるか中にいるか判断する関数
+  public get isBoard() {
+    return 0 <= this.x && this.x <= 7 && 0 <= this.y && this.y <= 7;
   }
 }
 
